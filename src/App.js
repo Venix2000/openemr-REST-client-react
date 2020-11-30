@@ -1,11 +1,27 @@
-import React from "react";
+import React, { Component } from "react";
 import "./styles.css";
+import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+import Routes from "./routes";
+import Home from "./Home";
+import Login from "./Login";
 
-export default function App() {
-  return (
-    <div className="App">
-      <h1>Hello CodeSaandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
-    </div>
-  );
+class App extends Component {
+  constructor() {
+    super();
+    this.state = {
+      appName: "Login",
+      home: false
+    };
+  }
+
+  render() {
+    return (
+      <div className="off-canvas-wrapper">
+        <Routes name={this.state.appName} />
+        <hr />
+      </div>
+    );
+  }
 }
+
+export default App;
