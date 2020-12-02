@@ -1,54 +1,61 @@
-import React, {Component} from 'react';
-import {Redirect} from 'react-router-dom';
+/*import React from "react";
+import { getUser, removeUserSession } from "./Utils/Common";
+
+function Home(props) {
+  const user = getUser();
+
+  // handle click event of logout button
+  const handleLogout = () => {
+    removeUserSession();
+    props.history.push("/login");
+  };
+  console.log("aaa");
+  return (
+    <div>
+      Welcome<br />
+      <br />
+      <input type="button" onClick={handleLogout} value="Logout" />
+    </div>
+  );
+}
+
+export default Home;
+*/
+import React, { Component } from "react";
+import { getUser, removeUserSession } from "./Utils/Common";
+import { Redirect } from "react-router-dom";
 
 class Home extends Component {
- 
+  constructor() {
+    super();
 
-  constructor(props) {
-    
+    this.state = {
+      grant_type: "password",
+      username: "",
+      password: "",
+      scope: "default",
+      redirectToReferrer: false
+    };
   }
 
-  componentWillMount() {
-
-   
-   }
-   
-
-
-
-  feedUpdate(e) {
-    
+  handleLogout() {
+    sessionStorage.removeItem("token");
   }
-
-  convertTime(created) {
-    
-  }
-
-  deleteFeedAction(e){
-    
-  }
-
-  deleteFeed(e){
-
-  }
-
-  getUserFeed() {
-
-  }
-
-  onChange(e){
-    
-   }
-   
-   logout(){
-     
-   }
 
   render() {
-	
+    if (!sessionStorage.getItem("token")) {
+      console.log("aaaaaaaaaasdddsafew");
+      return <Redirect to={"/"} />;
+    }
+
     return (
-      <div className="row" id="Body">
-        <p>assd</p>
+      <div>
+        <input
+          type="button"
+          onClick={this.handleLogout.bind(this)}
+          value="Logout"
+        />
+        <p>aaaaaaaaa</p>
       </div>
     );
   }
