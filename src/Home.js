@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 //import { getUser, removeUserSession } from "./Utils/Common";
 import { Redirect } from "react-router-dom";
-import { getFacilities, getAllPatients } from "./RestController";
 import PatientList from "./components/PatientList";
+import EncounterList from "./components/EncounterList";
+import ComponentExample from "./components/ComponentExample";
+
+import "./styles.css";
 
 class Home extends Component {
   constructor() {
@@ -17,18 +20,6 @@ class Home extends Component {
   handleLogout() {
     sessionStorage.removeItem("token");
     this.setState({ redirectToReferrer: true });
-    console.log(this.state.redirectToReferrer);
-  }
-
-  handleGetAllFacilities() {
-    getFacilities().then((result) => {
-      let responseJson = result;
-    });
-  }
-  handleGetAllPatients() {
-    getAllPatients().then((result) => {
-      let responseJson = result;
-    });
   }
 
   render() {
@@ -39,7 +30,6 @@ class Home extends Component {
       return <Redirect to={"/"} />;
     }*/
     if (this.state.redirectToReferrer == true) {
-      console.log("Redirect working");
       return <Redirect to={"/Login"} />;
     }
 
@@ -55,7 +45,7 @@ class Home extends Component {
             onClick={this.handleLogout.bind(this)}
             value="Logout"
           />
-
+          {/*
           <input
             type="button"
             onClick={this.handleGetAllFacilities.bind(this)}
@@ -67,35 +57,29 @@ class Home extends Component {
             onClick={this.handleGetAllPatients.bind(this)}
             value="Get All Patients"
           />
-          <input
-            type="button"
-            //onClick={this.handleGetAllFacilities.bind(this)}
-            value="Placeholder"
-          />
-          <input
-            type="button"
-            //onClick={this.handleGetAllFacilities.bind(this)}
-            value="Placeholder"
-          />
-          <input
-            type="button"
-            //onClick={this.handleGetAllFacilities.bind(this)}
-            value="Placeholder"
-          />
+*/}
           <input
             type="button"
             //onClick={this.handleGetAllFacilities.bind(this)}
             value="Placeholder"
           />
           <p>Home page, you should see this when logged in</p>
+          <h1>WORK IN PROGRESS</h1>
         </div>
 
+        <hr></hr>
         {/*=========== 
         MIDDLE BODY DIV 
           Includes patients list and indexer "wiki-style table of contents"
         ===========*/}
-        
+        <p>Patient List</p>
         <PatientList />
+        <hr></hr>
+        {/*<p>Encounter List</p>
+        <EncounterList />
+        <hr></hr>*/}
+        <p>Component Example Placeholder</p>
+        <ComponentExample />
       </div>
     );
   }

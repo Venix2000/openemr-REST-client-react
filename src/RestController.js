@@ -1,65 +1,19 @@
-import { getToken } from "./Utils/Common";
-
 const authURL = "https://mlp9791.uta.cloud/openemr/apis/api/auth";
 const patientURL = "https://mlp9791.uta.cloud/openemr/apis/api/patient";
 const facilityURL = "https://mlp9791.uta.cloud/openemr/apis/api/facility";
 const mainURL = "https://mlp9791.uta.cloud/openemr/apis/api/";
 
 export var ct = { "Content-Type": "application/json" };
-export var auth = {
-  Authorization:
-    sessionStorage.getItem("token_type") + " " + sessionStorage.getItem("token")
-};
-//======================================================
-// Specific functions
-export function PostAuth(type, userData) {
-  return new Promise((resolve, reject) => {
-    fetch(authURL, {
-      method: "POST",
-      body: JSON.stringify(userData),
-      headers: ct
-    })
-      .then((response) => {
-        resolve(response.json());
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
 
-export function getFacilities() {
-  //console.log("Get fac active");
-  return new Promise((resolve, reject) => {
-    fetch(facilityURL, {
-      method: "GET",
-      headers: auth
-    })
-      .then((response) => {
-        resolve(response.json());
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
+//Authorization function that updates upon login
+export function getAuth() {
+  return {
+    Authorization:
+      sessionStorage.getItem("token_type") +
+      " " +
+      sessionStorage.getItem("token")
+  };
 }
-
-export function getAllPatients() {
-  console.log("Get patients activated");
-  return new Promise((resolve, reject) => {
-    fetch(patientURL, {
-      method: "GET",
-      headers: auth
-    })
-      .then((response) => {
-        resolve(response.json());
-      })
-      .catch((error) => {
-        reject(error);
-      });
-  });
-}
-//======================================================
 
 //======================================================
 //Universal Functions
@@ -78,6 +32,23 @@ export function doFetch(method, resource, headers, body) {
       });
   });
 }
+/*
+function a(){
+  var a;
+doFetch("GET", "/patient", getAuth()).then((responseJson) => {
+  if (responseJson) {
+    a= responseJson;
+  }
+}
+
+);
+
+return a;
+}
+export var bc = a();
+console.log(bc);*/
+//RETURNS UNDEFINED, DO NOT REDESIGN FETCHING
+
 /*
 //=========================================
 // TESTING doFetch
